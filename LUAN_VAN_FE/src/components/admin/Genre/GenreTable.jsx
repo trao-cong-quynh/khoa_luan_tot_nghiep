@@ -1,0 +1,109 @@
+import React from "react";
+import { FaEdit, FaTrash, FaRedo } from "react-icons/fa";
+
+const GenreTable = ({
+  genres,
+  onEdit,
+  onDelete,
+  loading,
+  isDeletedView,
+  currentPage = 1,
+  itemsPerPage = 10,
+}) => {
+  return (
+    <div className="overflow-x-auto bg-white rounded-xl shadow-md p-6">
+      <table className="min-w-full divide-y divide-gray-200">
+        <thead className="bg-gradient-to-r from-blue-100 to-blue-200">
+          <tr>
+            <th className="py-3 px-4 text-left text-xs font-bold text-blue-700 uppercase tracking-wider w-16">
+              STT
+            </th>
+            <th className="py-3 px-4 text-left text-xs font-bold text-blue-700 uppercase tracking-wider w-1/2">
+              Tên thể loại
+            </th>
+            <th className="px-6 py-3 text-center text-xs font-bold text-blue-700 uppercase tracking-wider w-24">
+              Hành động
+            </th>
+          </tr>
+        </thead>
+        <tbody className="bg-white divide-y divide-gray-200">
+          {loading ? (
+            <tr>
+              <td colSpan={3} className="py-8 text-center">
+                <div className="flex justify-center items-center">
+                  <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500"></div>
+                  <span className="ml-2 text-gray-500">
+                    Đang tải dữ liệu...
+                  </span>
+                </div>
+              </td>
+            </tr>
+          ) : genres.length === 0 ? (
+            <tr>
+              <td colSpan={3} className="py-8 text-center">
+                <div className="flex flex-col items-center justify-center text-gray-400">
+                  <svg
+                    className="w-12 h-12 mb-2"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
+                    />
+                  </svg>
+                  <p>Không có thể loại nào</p>
+                </div>
+              </td>
+            </tr>
+          ) : (
+            genres.map((genre, idx) => (
+              <tr
+                key={genre.genre_id}
+                className="hover:bg-blue-50 transition-colors duration-150"
+              >
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                  {(currentPage - 1) * itemsPerPage + idx + 1}
+                </td>
+                <td className="px-6 py-4 text-sm text-gray-900">
+                  <div className="truncate max-w-xs" title={genre.genre_name}>
+                    {genre.genre_name}
+                  </div>
+                </td>
+                <td className="py-3 px-4 whitespace-nowrap text-center">
+                  <div className="flex justify-center space-x-2">
+                    {!isDeletedView && (
+                      <button
+                        onClick={() => onEdit(genre)}
+                        className="p-2 cursor-pointer text-blue-600 hover:text-blue-800 transition-colors rounded-lg hover:bg-blue-100"
+                        title="Chỉnh sửa"
+                      >
+                        <FaEdit />
+                      </button>
+                    )}
+                    <button
+                      onClick={() => onDelete(genre.genre_id)}
+                      className={`p-2 cursor-pointer ${
+                        isDeletedView
+                          ? "text-green-600 hover:text-green-800 hover:bg-green-100"
+                          : "text-red-600 hover:text-red-800 hover:bg-red-100"
+                      } transition-colors rounded-lg`}
+                      title={isDeletedView ? "Khôi phục" : "Xóa"}
+                    >
+                      {isDeletedView ? <FaRedo /> : <FaTrash />}
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            ))
+          )}
+        </tbody>
+      </table>
+    </div>
+  );
+};
+
+export default GenreTable;

@@ -1,0 +1,88 @@
+@import "tailwindcss";
+
+:root {
+  --color-primary: #32cd32;
+  --color-hover: #4455bb;
+  --color-text: #006666;
+  --color-blue: #3366cc;
+  --color-button: #32cd32;
+  --color-border: #006666;
+  --color-header-bg: #006666;
+  --color-showtime-bg: #006666;
+  --color-text-showtime: #006666;
+  --color-hover-showtime: #32cd32;
+
+  /* thanhtoan */
+  --color-white: #ffffff;
+  --color-text-white: #ffffff;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+  color: black !important;
+}
+.swiper-button-next,
+.swiper-button-prev {
+  color: black;
+  transition: color 0.3s;
+}
+
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+  color: #f97316; /* Cam khi hover */
+}
+
+.text-primary-custom {
+  color: #232946 !important;
+}
+
+/* Custom Scrollbar for Sidebar */
+.sidebar-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: #3f72af transparent;
+}
+.sidebar-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+
+.sidebar-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.sidebar-scroll::-webkit-scrollbar-thumb {
+  background-color: #3f72af;
+  border-radius: 3px;
+}
+
+/* Font size mặc định (desktop) */
+.react-select__control,
+.react-select__option,
+.react-select__placeholder,
+.react-select__single-value {
+  font-size: 16px;
+}
+
+/* Tablet (≤1024px) */
+@media (max-width: 1024px) {
+  .react-select__control,
+  .react-select__option,
+  .react-select__placeholder,
+  .react-select__single-value {
+    font-size: 14px;
+  }
+}
+
+/* Mobile (≤640px) */
+@media (max-width: 640px) {
+  .react-select__control,
+  .react-select__option,
+  .react-select__placeholder,
+  .react-select__single-value {
+    font-size: 12px;
+  }
+}
+
+.fixed-height-panel {
+  height: 350px; /* Hoặc một giá trị phù hợp */
+  overflow-y: auto; /* Thêm thanh cuộn khi nội dung vượt quá chiều cao */
+}
